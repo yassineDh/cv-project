@@ -9,16 +9,24 @@ class GeneralInformation extends Component {
       lastName: "",
       email: "",
       phoneNumber: 0,
-      isComplete:false
+      isComplete: false
     };
-
+    console.log("inside constructor");
     this.submitHandler = this.submitHandler.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
+    this.updateHandler = this.updateHandler.bind(this);
   }
 
   submitHandler(e) {
     e.preventDefault();
-    console.log(this.state);
+    // console.log("submit");
+    // for (let index = 0; index < e.target.length; index++) {
+    //   if (e.target[index].localName == "input") {
+    //     e.target[index].value = ""
+    //   }
+
+
+    // }
     this.setState({
       isComplete: true,
     });
@@ -32,7 +40,18 @@ class GeneralInformation extends Component {
     });
   }
 
+  updateHandler(e) {
+    e.preventDefault();
+    console.log("inside update");
+    this.setState({
+      isComplete: false,
+    });
+  }
   render() {
+
+    let button = this.state.isComplete ? <button type="button" onClick={this.updateHandler}>Update</button> : <button type="submit">Add</button>;
+    console.log("inside render");
+    console.log(this.state)
     return (
       <React.Fragment>
         <form onSubmit={this.submitHandler}>
@@ -43,31 +62,31 @@ class GeneralInformation extends Component {
               name="firstName"
               placeholder="first name"
               onChange={this.changeHandler}
-              disabled={ this.state.isComplete }
+              disabled={this.state.isComplete}
             />
             <input
               type="text"
               name="lastName"
               placeholder="last name"
               onChange={this.changeHandler}
-              disabled={ this.state.isComplete }
+              disabled={this.state.isComplete}
             />
             <input
               type="email"
               name="email"
               placeholder="email"
               onChange={this.changeHandler}
-              disabled={ this.state.isComplete }
+              disabled={this.state.isComplete}
             />
             <input
               type="number"
               name="phoneNumber"
               placeholder="phone number"
               onChange={this.changeHandler}
-              disabled={ this.state.isComplete }
+              disabled={this.state.isComplete}
             />
           </fieldset>
-          <button type="submit">{this.state.isComplete?"Update":"Add"}</button>
+          {button}
         </form>
       </React.Fragment>
     );
