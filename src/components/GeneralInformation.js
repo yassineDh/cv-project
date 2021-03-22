@@ -9,6 +9,7 @@ class GeneralInformation extends Component {
       lastName: "",
       email: "",
       phoneNumber: 0,
+      isComplete:false
     };
 
     this.submitHandler = this.submitHandler.bind(this);
@@ -18,6 +19,9 @@ class GeneralInformation extends Component {
   submitHandler(e) {
     e.preventDefault();
     console.log(this.state);
+    this.setState({
+      isComplete: true,
+    });
   }
 
   changeHandler(e) {
@@ -39,27 +43,31 @@ class GeneralInformation extends Component {
               name="firstName"
               placeholder="first name"
               onChange={this.changeHandler}
+              disabled={ this.state.isComplete }
             />
             <input
               type="text"
               name="lastName"
               placeholder="last name"
               onChange={this.changeHandler}
+              disabled={ this.state.isComplete }
             />
             <input
               type="email"
               name="email"
               placeholder="email"
               onChange={this.changeHandler}
+              disabled={ this.state.isComplete }
             />
             <input
               type="number"
               name="phoneNumber"
               placeholder="phone number"
               onChange={this.changeHandler}
+              disabled={ this.state.isComplete }
             />
           </fieldset>
-          <button type="submit">Add</button>
+          <button type="submit">{this.state.isComplete?"Update":"Add"}</button>
         </form>
       </React.Fragment>
     );
