@@ -9,9 +9,9 @@ class GeneralInformation extends Component {
       lastName: "",
       email: "",
       phoneNumber: 0,
-      isComplete: false
+      isComplete: false,
     };
-    console.log("inside constructor");
+
     this.submitHandler = this.submitHandler.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
     this.updateHandler = this.updateHandler.bind(this);
@@ -24,7 +24,6 @@ class GeneralInformation extends Component {
     //   if (e.target[index].localName == "input") {
     //     e.target[index].value = ""
     //   }
-
 
     // }
     this.setState({
@@ -42,16 +41,20 @@ class GeneralInformation extends Component {
 
   updateHandler(e) {
     e.preventDefault();
-    console.log("inside update");
+
     this.setState({
       isComplete: false,
     });
   }
   render() {
+    let button = this.state.isComplete ? (
+      <button type="button" onClick={this.updateHandler}>
+        Update
+      </button>
+    ) : (
+      <button type="submit">Add</button>
+    );
 
-    let button = this.state.isComplete ? <button type="button" onClick={this.updateHandler}>Update</button> : <button type="submit">Add</button>;
-    console.log("inside render");
-    console.log(this.state)
     return (
       <React.Fragment>
         <form onSubmit={this.submitHandler}>
