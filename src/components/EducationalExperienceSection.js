@@ -108,6 +108,7 @@ class EducationalExperienceSection extends Component {
               index={element.id}
               add={this.submitHandler}
               deleteExp={this.deleteExprience}
+              key={element.id}
             />
           ))}
         </fieldset>
