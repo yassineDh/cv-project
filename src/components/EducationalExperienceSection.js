@@ -31,41 +31,37 @@ class EducationalExperienceSection extends Component {
       let newObj = Object.assign({}, element, { isComplete: true });
       return newObj;
     });
-    this.setState(
-      { educationalExperiences: completedArray },
-      console.log(this.state)
-    );
+    this.setState({ educationalExperiences: completedArray });
   }
 
   changeHandler(e, id) {
     let name = e.target.name;
     let value = e.target.value;
     let newArray = this.state.educationalExperiences.map((element) => {
-      if (element.id == id) {
-        element[name] = value;
-      }
-
+      if (element.id == id) element[name] = value;
       return element;
     });
     this.setState({
       educationalExperiences: newArray,
     });
   }
-  updateHandler(e) {
+
+  updateHandler(e,id) {
     e.preventDefault();
-    console.log("inside update");
+    
+    let newArray = this.state.educationalExperiences.map((element) => {
+      if (element.id == id) element.isComplete = false;
+      return element;
+    });
     this.setState({
-      isComplete: false,
+      educationalExperiences: newArray,
     });
   }
 
   submitHandler(e, id) {
     e.preventDefault();
     let newArray = this.state.educationalExperiences.map((element) => {
-      if (element.id == id) {
-        element.isComplete = true;
-      }
-
+      if (element.id == id) element.isComplete = true;
       return element;
     });
     this.setState({
@@ -74,15 +70,10 @@ class EducationalExperienceSection extends Component {
   }
 
   addExperience() {
-    // let prevArr = this.state.educationalExperiences.slice(0);
-    // let newArr = prevArr.push(this.eduExp);
     let newEduExp = Object.create(this.eduExp);
     newEduExp.id = uuidv1();
     let cloneArray = [...this.state.educationalExperiences, newEduExp];
-    this.setState(
-      { educationalExperiences: cloneArray },
-      console.log(this.state)
-    );
+    this.setState({ educationalExperiences: cloneArray });
   }
 
   deleteExprience(e, i) {
@@ -95,10 +86,9 @@ class EducationalExperienceSection extends Component {
   render() {
     return (
       <React.Fragment>
-        <button onClick={this.addExperience}>Add educational experience</button>
-
-        {/* <EducationalExperience update={this.updateHandler} submit={this.saveAll} change={this.changeHandler} isComplete={this.state.isComplete}/> */}
         <fieldset>
+        <legend>Educational experience section</legend>
+        <button style={{marginLeft:"700px"}} onClick={this.addExperience}>Add educational experience</button>
           {this.state.educationalExperiences.map((element) => (
             <EducationalExperience
               update={this.updateHandler}
@@ -113,7 +103,7 @@ class EducationalExperienceSection extends Component {
           ))}
         </fieldset>
 
-        <button onClick={this.saveAll}>Save All</button>
+        {this.state.educationalExperiences.length >0 && <button onClick={this.saveAll}>Save All</button>}
       </React.Fragment>
     );
   }

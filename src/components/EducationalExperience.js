@@ -4,7 +4,7 @@ class EducationalExperience extends Component {
   render() {
     let { isComplete, update, change, index, add, deleteExp} = this.props;
     let button = isComplete ? (
-      <button type="button" onClick={update}>
+      <button type="button" onClick={(e)=>update(e,index)}>
         Update
       </button>
     ) : (
@@ -16,7 +16,6 @@ class EducationalExperience extends Component {
       <React.Fragment>
         <form onSubmit={(e) => add(e, index)}>
 
-          <legend>Educational experience section</legend>
           <input
             type="text"
             name="schoolName"
