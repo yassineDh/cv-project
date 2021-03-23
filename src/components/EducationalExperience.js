@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class EducationalExperience extends Component {
   render() {
-    let { isComplete, update, submit, change } = this.props;
+    let { isComplete, update, submit, change,index } = this.props;
     let button = isComplete ? (
       <button type="button" onClick={update}>
         Update
@@ -19,28 +19,28 @@ class EducationalExperience extends Component {
               type="text"
               name="schoolName"
               placeholder="school name"
-              onChange={change}
+              onChange={(e)=>change(e,index)}
               disabled={isComplete}
             />
             <input
               type="text"
               name="titleStudy"
               placeholder="title of study"
-              onChange={change}
+              onChange={(e)=>change(e,index)}
               disabled={isComplete}
             />
             <input
               type="date"
               name="beginDate"
               placeholder="beginning date"
-              onChange={change}
+              onChange={(e)=>change(e,index)}
               disabled={isComplete}
             />
             <input
               type="date"
               name="endDate"
               placeholder="last date"
-              onChange={change}
+              onChange={(e)=>change(e,index)}
               disabled={isComplete}
             />
           </fieldset>

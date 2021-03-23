@@ -24,11 +24,6 @@ class EducationalExperienceSection extends Component {
 
   submitHandler(e) {
     e.preventDefault();
-    // console.log(this.state);
-    // this.setState({
-    //   educationalExperiences[i].isComplete: true;
-    // });
-
     let completedArray = this.state.educationalExperiences.map((element) => {
       let newObj = Object.assign({}, element, { isComplete: true });
       return newObj;
@@ -39,18 +34,18 @@ class EducationalExperienceSection extends Component {
     );
   }
 
-  changeHandler(e,i) {
+  changeHandler(e, i) {
     let name = e.target.name;
     let value = e.target.value;
-    let newArray = this.state.educationalExperiences.map((element,index)=>{
-      if(index == i){
-        element[name]= value
+    let newArray = this.state.educationalExperiences.map((element, index) => {
+      if (index == i) {
+        element[name] = value
       }
 
       return element;
     })
     this.setState({
-      educationalExperiences:newArray
+      educationalExperiences: newArray
     });
   }
   updateHandler(e) {
@@ -64,7 +59,8 @@ class EducationalExperienceSection extends Component {
   addExperience() {
     // let prevArr = this.state.educationalExperiences.slice(0);
     // let newArr = prevArr.push(this.eduExp);
-    let cloneArray = [...this.state.educationalExperiences, this.eduExp];
+    let newEduExp = Object.create(this.eduExp);
+    let cloneArray = [...this.state.educationalExperiences, newEduExp];
     this.setState(
       { educationalExperiences: cloneArray },
       console.log(this.state)
@@ -76,7 +72,7 @@ class EducationalExperienceSection extends Component {
         <button onClick={this.addExperience}>Add educational experience</button>
         <button onClick={this.submitHandler}>test</button>
         {/* <EducationalExperience update={this.updateHandler} submit={this.submitHandler} change={this.changeHandler} isComplete={this.state.isComplete}/> */}
-        {/* {this.state.educationalExperiences.map((element,index) =><EducationalExperience update={this.updateHandler} submit={this.submitHandler} change={this.changeHandler} isComplete={element.isComplete}/>  )} */}
+        {this.state.educationalExperiences.map((element, index) => <EducationalExperience update={this.updateHandler} submit={this.submitHandler} change={this.changeHandler} isComplete={element.isComplete} index={index} />)}
       </React.Fragment>
     );
   }
