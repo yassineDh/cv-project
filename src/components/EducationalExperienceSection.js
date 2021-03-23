@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import EducationalExperience from "./EducationalExperience";
+import EducationalExperienceDisplay from "./EducationalExperienceDisplay";
 import { v1 as uuidv1 } from "uuid";
 
 class EducationalExperienceSection extends Component {
@@ -46,9 +47,9 @@ class EducationalExperienceSection extends Component {
     });
   }
 
-  updateHandler(e,id) {
+  updateHandler(e, id) {
     e.preventDefault();
-    
+
     let newArray = this.state.educationalExperiences.map((element) => {
       if (element.id == id) element.isComplete = false;
       return element;
@@ -87,23 +88,39 @@ class EducationalExperienceSection extends Component {
     return (
       <React.Fragment>
         <fieldset>
-        <legend>Educational experience section</legend>
-        <button style={{marginLeft:"700px"}} onClick={this.addExperience}>Add educational experience</button>
-          {this.state.educationalExperiences.map((element) => (
-            <EducationalExperience
-              update={this.updateHandler}
-              submit={this.saveAll}
-              change={this.changeHandler}
-              isComplete={element.isComplete}
-              index={element.id}
-              add={this.submitHandler}
-              deleteExp={this.deleteExprience}
-              key={element.id}
-            />
-          ))}
+          <legend>Educational experience section</legend>
+          <button style={{ marginLeft: "700px" }} onClick={this.addExperience}>
+            Add educational experience
+          </button>
+          {this.state.educationalExperiences.map((element) => {
+            if (element.isComplete) {
+              return (
+                <EducationalExperienceDisplay
+                  key={element.id}
+                  {...element}
+                  deleteExp={this.deleteExprience}
+                  update={this.updateHandler}
+                  index={element.id}
+                />
+              );
+            }
+            return (
+              <EducationalExperience
+                submit={this.saveAll}
+                change={this.changeHandler}
+                isComplete={element.isComplete}
+                index={element.id}
+                add={this.submitHandler}
+                key={element.id}
+                {...element}
+              />
+            );
+          })}
         </fieldset>
 
-        {this.state.educationalExperiences.length >0 && <button onClick={this.saveAll}>Save All</button>}
+        {this.state.educationalExperiences.length > 0 && (
+          <button onClick={this.saveAll}>Save All</button>
+        )}
       </React.Fragment>
     );
   }
