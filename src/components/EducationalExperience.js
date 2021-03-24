@@ -12,7 +12,6 @@ class EducationalExperience extends Component {
             name="schoolName"
             placeholder="school name"
             onChange={(e) => change(e, index)}
-            disabled={isComplete}
             value={this.props.schoolName}
           />
           <input
@@ -20,7 +19,6 @@ class EducationalExperience extends Component {
             name="titleStudy"
             placeholder="title of study"
             onChange={(e) => change(e, index)}
-            disabled={isComplete}
             value={this.props.titleStudy}
           />
           <input
@@ -28,7 +26,6 @@ class EducationalExperience extends Component {
             name="beginDate"
             placeholder="beginning date"
             onChange={(e) => change(e, index)}
-            disabled={isComplete}
             value={this.props.beginDate}
           />
           <input
@@ -36,7 +33,6 @@ class EducationalExperience extends Component {
             name="endDate"
             placeholder="last date"
             onChange={(e) => change(e, index)}
-            disabled={isComplete}
             value={this.props.endDate}
           />
           <button type="submit">Add</button>
